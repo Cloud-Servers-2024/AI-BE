@@ -49,6 +49,7 @@ school_work_copilot_agent = ChatPromptTemplate.from_messages(
 
 class SchoolWorkCopilotAgent():
     def __init__(self):
+        #TODO: DELETE THIS KEY AFTER DONE WITH DEMO
         self.open_ai_key = "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"
         self.llm_model = "gpt-4o"
 
@@ -91,5 +92,5 @@ async def generate_AI_response(message: API_schema):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000, workers=1)
 
