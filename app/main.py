@@ -17,7 +17,7 @@ app.add_middleware(
 )
 
 if not os.environ.get("OPENAI_API_KEY"):
-    os.environ["OPENAI_API_KEY"] = "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"
+    os.environ["OPENAI_API_KEY"] = "sk-zmuL2ZkmIp9vwNBtxmGiuKLHz1jXNv2C9eLLVPOmzKT3BlbkFJFfTt_iwfv1JPP7IpS_wvrN1LD1Fc2n0FsMYn3ez88A"
 
 @app.get("/health")
 async def health_check():
