@@ -54,7 +54,8 @@ class SchoolWorkCopilotAgent():
         self.llm_model = "gpt-4o"
 
     def generate_response_to_student(self, user_message, assignment_title_description):
-        llm = ChatOpenAI(api_key=os.getenv("OPENAI_KEY"), model=str(self.llm_model))
+        print(os.getenv(OPENAI_API_KEY))
+        llm = ChatOpenAI(model=str(self.llm_model))
         chain = school_work_copilot_agent | llm.with_structured_output(schema=agent_output)
         response_to_student = chain.invoke({
             "user_message": user_message,
