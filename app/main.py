@@ -16,6 +16,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+if not os.environ.get("OPENAI_API_KEY"):
+    os.environ["OPENAI_API_KEY"] = "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"
 
 @app.get("/health")
 async def health_check():
@@ -54,7 +56,6 @@ class SchoolWorkCopilotAgent():
         self.llm_model = "gpt-4o"
 
     def generate_response_to_student(self, user_message, assignment_title_description):
-        print(os.getenv(OPENAI_API_KEY))
         llm = ChatOpenAI(model=str(self.llm_model))
         chain = school_work_copilot_agent | llm.with_structured_output(schema=agent_output)
         response_to_student = chain.invoke({
