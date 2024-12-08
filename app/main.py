@@ -3,6 +3,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
+import os
 
 app = FastAPI(title="School work copilot")
 
@@ -50,11 +51,10 @@ school_work_copilot_agent = ChatPromptTemplate.from_messages(
 class SchoolWorkCopilotAgent():
     def __init__(self):
         #TODO: DELETE THIS KEY AFTER DONE WITH DEMO
-        self.open_ai_key = "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"
         self.llm_model = "gpt-4o"
 
     def generate_response_to_student(self, user_message, assignment_title_description):
-        llm = ChatOpenAI(api_key=str(self.open_ai_key), model=str(self.llm_model))
+        llm = ChatOpenAI(api_key=os.getenv("OPENAI_KEY"), model=str(self.llm_model))
         chain = school_work_copilot_agent | llm.with_structured_output(schema=agent_output)
         response_to_student = chain.invoke({
             "user_message": user_message,
